@@ -3230,6 +3230,7 @@ ResetTreeMax(
 
     xTreeMax = 0;
 
+#pragma loop count min(64)
     for (ctr = 0; ctr < NumItems; ctr++)
     {
         SendMessage(hwndLB, LB_GETTEXT, (WPARAM)ctr, (LPARAM)&pNode);

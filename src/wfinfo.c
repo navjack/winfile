@@ -1587,10 +1587,12 @@ UpdateDriveListComplete(VOID)
    {
        SendMessage(hwndDriveList, WM_SETREDRAW, FALSE, 0);
        CurSel = SendMessage(hwndDriveList, CB_GETCURSEL, 0, 0);
+#pragma loop count min(1024)
        for (driveInd = 0; driveInd < cDrives; driveInd++)
        {
            if (aDriveInfo[rgiDrive[driveInd]].dwLines[ALTNAME_MULTI] != 1)
            {
+#pragma forceinline recursive
               SendMessage(hwndDriveList, CB_DELETESTRING, driveInd, 0);
               SendMessage(hwndDriveList, CB_INSERTSTRING, driveInd, rgiDrive[driveInd]);
            }

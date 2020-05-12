@@ -482,6 +482,7 @@ AddCommasInternal(LPTSTR szBuf, DWORD dw)
       if (count == 3) {
          count = 1;
          if (p > szBuf) {
+#pragma loop count min(256)
             for (i=iCommaLen-1 ; i >=0 ;i--)
                *p-- = szComma[i];
          }

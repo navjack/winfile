@@ -2052,6 +2052,7 @@ GetMaxExtent(HWND hwndLB, LPXDTALINK lpLink, BOOL bNTFS)
    hdc = GetDC(hwndLB);
    hOld = SelectObject(hdc, hFont);
 
+#pragma loop count min(1024)
    for (dwItems = MemLinkToHead(lpLink)->dwEntries, lpxdta = MemFirst(lpLink);
         dwItems;
         dwItems--, lpxdta = MemNext(&lpLink, lpxdta))
@@ -3477,6 +3478,8 @@ SortDirList(
          iMax++;
 
       if (i != iMax) {
+#pragma parallel
+#pragma loop count min(1024)
          for (j = i; j > iMax; j--)
             lplpxdta[j] = lplpxdta[j-1];
       }

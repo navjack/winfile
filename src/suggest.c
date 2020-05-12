@@ -167,7 +167,7 @@ FormatError(
       //
       // We found one, add a new line in for formatting
       //
-
+#pragma loop count min(256)
       for(;iAddNewline; iAddNewline--)
          lpBuf[-iAddNewline] = CHAR_NEWLINE;
 

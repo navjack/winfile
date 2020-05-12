@@ -369,6 +369,7 @@ BOOL FillLBWithEntryTable (HWND hWnd, PEXEINFO pExeInfo )
             break;
 
             case 0xFF:      // MOVEABLE segments
+#pragma loop count min(128)
                 for (wI=0; wI<(WORD)bBundles; wI++)
                 {
                     PMENTRY pe = (PMENTRY)ptr;
@@ -392,6 +393,7 @@ BOOL FillLBWithEntryTable (HWND hWnd, PEXEINFO pExeInfo )
             break;
 
             default:        // FIXED Segments
+#pragma loop count min(128)
                 for (wI=0; wI<(WORD)bBundles; wI++)
                 {
                     PFENTRY pe = (PFENTRY)ptr;

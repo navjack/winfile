@@ -68,18 +68,23 @@ BiasMenu(HMENU hMenu, UINT Bias)
    HMENU hSubMenu;
    TCHAR szMenuString[MENU_STRING_SIZ];
 
+#pragma forceinline recursive
    count = GetMenuItemCount(hMenu);
 
    if (count == (UINT) -1)
       return;
 
+#pragma loop count min(1024)
    for (pos = 0; pos < count; pos++) {
 
+#pragma forceinline recursive
       id = GetMenuItemID(hMenu, pos);
 
       if (id  == (UINT) -1) {
          // must be a popup, recurse and update all ID's here
+#pragma forceinline recursive
          if (hSubMenu = GetSubMenu(hMenu, pos))
+#pragma forceinline recursive
             BiasMenu(hSubMenu, Bias);
       } else if (id) {
          // replace the item that was there with a new
@@ -88,8 +93,11 @@ BiasMenu(HMENU hMenu, UINT Bias)
          // makes sure id range is 0=99 first; really should assert or throw an exception
          id %= 100;
 
+#pragma forceinline recursive
          GetMenuString(hMenu, pos, szMenuString, COUNTOF(szMenuString), MF_BYPOSITION);
+#pragma forceinline recursive
          DeleteMenu(hMenu, pos, MF_BYPOSITION);
+#pragma forceinline recursive
          InsertMenu(hMenu, pos, MF_BYPOSITION | MF_STRING, id + Bias, szMenuString);
       }
    }

@@ -99,6 +99,7 @@ LPWSTR QuotedDropList(IDataObject *pDataObject)
 
 		cFiles = DragQueryFile(hdrop, 0xffffffff, NULL, 0);
 		cchFiles = 0;
+#pragma loop count min(256)
 		for (iFile = 0; iFile < cFiles; iFile++)
 			cchFiles += DragQueryFile(hdrop, iFile, NULL, 0) + 1 + 2;
 

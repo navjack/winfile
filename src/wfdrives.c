@@ -712,9 +712,11 @@ DrivesWndProc(HWND hWnd, UINT wMsg, WPARAM wParam, LPARAM lParam)
 
 
 
+#pragma loop count min(1024)
           for (i=0; i < cDrives; i++) {
 
               if (rgiDrive[i] == nDrive) {
+#pragma forceinline recursive
                   SetWindowLongPtr(hWnd, GWL_CURDRIVEIND, i);
                   SetWindowLongPtr(hWnd, GWL_CURDRIVEFOCUS, i);
               }
